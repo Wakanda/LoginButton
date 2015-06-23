@@ -1,0 +1,27 @@
+{
+    "name": "LoginButton",
+    "studioName": "Login Button",
+    "category": "Form Controls",
+    "type": "widget",
+    "iconPath": "/icons/widget.png",
+    "author": "Widget SAS",
+    "contributors": [],
+    "version": "1.0.0",
+    "copyright": "(c) 2015 Widget Developer",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Wakanda/RadioGroup"
+    },
+    "keywords": ["wakanda", "widget", "radio"],
+    "engines": {"wakanda": ">= 11"},
+    "license": "MIT",
+    "testDependencies": [
+        "tests/widget-spec.js"
+    ],
+    "loadDependencies": [
+        {"file": "widget.js"},
+        {"file": "css/widget.css"},
+        {"file": "designer.js","studioOnly": true}
+    ],
+    "hash": ""
+}

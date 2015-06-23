@@ -1,0 +1,11 @@
+/*** radioGroup bootstrap compliant ***/
+
+.waf-theme.default .btn.btn-primary {
+    background: rgb(176, 208, 255);
+    color: #696969;
+    text-shadow: 0 0 0 #000;
+}
+
+.waf-theme.default button:disabled {
+	opacity: 0.5;
+}
