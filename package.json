@@ -7,21 +7,17 @@
     "author": "Widget SAS",
     "contributors": [],
     "version": "1.0.0",
-    "copyright": "(c) 2015 Widget Developer",
+    "copyright": "(c) 2015 Wakanda",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Wakanda/RadioGroup"
+        "url": "https://github.com/Wakanda/LoginButton"
     },
-    "keywords": ["wakanda", "widget", "radio"],
+    "keywords": ["wakanda", "widget"],
     "engines": {"wakanda": ">= 11"},
     "license": "MIT",
-    "testDependencies": [
-        "tests/widget-spec.js"
-    ],
     "loadDependencies": [
         {"file": "widget.js"},
         {"file": "css/widget.css"},
         {"file": "designer.js","studioOnly": true}
-    ],
-    "hash": ""
+    ]
 }
