@@ -5,10 +5,15 @@ WAF.define('LoginButton', ['waf-core/widget'], function(widget) {
     var login = widget.create('LoginButton', {
     	tagName: 'button',
     	titleLogin: widget.property({ type: 'string', defaultValue: 'Login' }),
-    	//titleLogout: widget.property({ type: 'string', defaultValue: 'Logout' }),
+    	titleLogout: widget.property({ type: 'string', defaultValue: 'Logout' }),
         redirectUrl: widget.property({
             type: 'string',
             description: "If the login is successful, the page will be redirected to this url",
+            bindable: true
+        }),
+        redirectUrlLogout: widget.property({
+            type: 'string',
+            description: "If the logout is successful, the page will be redirected to this url",
             bindable: true
         }),
         loginField: widget.property({
@@ -30,10 +35,11 @@ WAF.define('LoginButton', ['waf-core/widget'], function(widget) {
             var loginElementID = this.loginField() || null;
             var pwdElementID = this.passwordField() || null;
             if (loginElementID === null || pwdElementID === null) return;
-            
+     
             var loginElement = $$(loginElementID);
             var pwdElement = $$(pwdElementID);
-            if (!loginElement.value || !pwdElement.value) return;
+               
+            if ((!loginElement.value || !pwdElement.value)) return;
 
             var userName = loginElement.value() || null;
             var password = pwdElement.value() || null;
@@ -53,9 +59,25 @@ WAF.define('LoginButton', ['waf-core/widget'], function(widget) {
                         that.user = null;
                         that.fire('error', {event:event, user: userName});
                     }
+
                     that.render();
                 }
             }, userName, password);            
+        },
+        _logout: function() {
+            var that = this;
+            WAF.directory.logout({
+                onSuccess:function(event) {
+                    that.fire('logout', {event:event, user: that.user});
+                    that.user = null;
+                    var rurl = that.redirectUrlLogout();
+                    if (rurl) {
+                        document.location.href = rurl;
+                    } else {
+                        that.checkState();    
+                    }
+                }
+            });
         },
         checkState: function() {
             var that = this;
@@ -67,8 +89,7 @@ WAF.define('LoginButton', ['waf-core/widget'], function(widget) {
             });
         },
 		render: function() {
-			//this.node.innerHTML = '<span>' + (this.user ? this.titleLogout() : this.titleLogin()) + '</span>';
-			this.node.innerHTML = '<span>' + this.titleLogin() + '</span>';
+			this.node.innerHTML = '<span>' + (this.user ? this.titleLogout() : this.titleLogin()) + '</span>';
 		},
         init: function() {
 
@@ -76,7 +97,7 @@ WAF.define('LoginButton', ['waf-core/widget'], function(widget) {
 
 			this.render();
             this.titleLogin.onChange(this.render);
-            //this.titleLogout.onChange(this.render);
+            this.titleLogout.onChange(this.render);
 
             this.addClass('btn btn-default');
             
@@ -85,9 +106,11 @@ WAF.define('LoginButton', ['waf-core/widget'], function(widget) {
             this.checkState();
              
             $(this.node).on('click', function() {
-                //if (that.user === null) {
+                if (that.user === null) {
                     that._login();
-                //}
+                } else {
+                    that._logout();
+                }
             });
         }
     });

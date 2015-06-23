@@ -9,6 +9,8 @@
 
     LoginButton.customizeProperty('loginField', {title: 'Login field ID'});
     LoginButton.customizeProperty('passwordField', {title: 'Password field ID'});
+    LoginButton.customizeProperty('redirectUrlLogout', {title: 'Logout URL redirect'});
+    LoginButton.customizeProperty('redirectUrl', {title: 'Login URL redirect'});
 
     LoginButton.addEvents({ 
         'name':'action' 
@@ -18,5 +20,8 @@
     },{ 
         'name':'login', 
         'category':'Login Events'
+    },{
+        'name':'logout', 
+        'category':'Logout Events'
     });
 });
